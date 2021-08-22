@@ -10,45 +10,59 @@ const display = document.querySelector(".display");
 const btn_r1 = document.querySelectorAll(".btn_r1");
 const btn_last = document.querySelectorAll(".btn_last");
 
-function toggle_header() {
-  heading.classList.toggle("dark_mode");
-  logo.classList.toggle("logo_dark");
-  display.classList.toggle("display_dark");
-}
-
-function toggle_btns() {
-  for (let i = 0; i < btn_r1.length; i++) {
-    btn_r1[i].classList.toggle("btn_r1_dark");
-  }
-}
-
 function toggle_theme() {
   if (toggle_btn_state === light_img) {
+
+    // changing the button from sun to moon.
     toggle_btn.setAttribute("src", dark_img);
     toggle_btn_state = dark_img;
-    for (let i = 0; i < btn_last.length; i++) {
-      btn_last[i].setAttribute("style", "background-color: #4f79dc;");
+
+    // changing the color of the last column buttons
+    for (let btn of btn_last) {
+        btn.setAttribute("style", "background-color: #4f79dc;");
     }
+
+    // changin the color of "+" button
     document
       .querySelector(".last_row")
       .lastElementChild.setAttribute("style", "background-color: #4f79dc;");
-    document
+    
+    // Changing the color of "=" button
+      document
       .querySelector(".last_row")
       .children[2].setAttribute("style", "background-color: #0048F2;");
+
   } else {
+    // changing the button from sun to moon.
     toggle_btn.setAttribute("src", light_img);
     toggle_btn_state = light_img;
-    for (let i = 0; i < btn_last.length; i++) {
-      btn_last[i].removeAttribute("style");
+    
+    // changing the color of the last column buttons
+    for (let btn of btn_last) {
+      btn.removeAttribute("style");
     }
+
+    // changin the color of "+" button
     document
       .querySelector(".last_row")
       .lastElementChild.removeAttribute("style");
-    document.querySelector(".last_row").children[2].removeAttribute("style");
+    
+      // Changing the color of "=" button
+      document.querySelector(".last_row").children[2].removeAttribute("style");
   }
+
+  // toggling the color of whole body.
   body.classList.toggle("dark_mode");
-  toggle_header();
-  toggle_btns();
+
+  // toggling colors of calculator header.
+  heading.classList.toggle("dark_mode");
+  logo.classList.toggle("logo_dark");
+  display.classList.toggle("display_dark");
+
+  // toggling button of first row buttons.
+  for (let btn in btn_r1) {
+    btn.classList.toggle("btn_r1_dark");
+  }
 }
 
 toggle_btn.addEventListener("click", toggle_theme);
